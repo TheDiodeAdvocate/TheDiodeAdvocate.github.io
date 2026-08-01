@@ -1,1 +1,1 @@
-# TheDiodeAdvocate.github.io
+# My tiny blog
