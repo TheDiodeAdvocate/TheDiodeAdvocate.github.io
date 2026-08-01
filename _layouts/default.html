@@ -9,14 +9,31 @@
 <body>
     <div class="container">
         <header>
-            <div class="site-title"><a href="{{ '/' | relative_url }}">Ivan's Workspace<span class="blink-cursor"></span></a></div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <div class="site-title"><a href="{{ '/' | relative_url }}">Ivan's Workspace<span class="blink-cursor"></span></a></div>
+                    <div class="timestamp" id="timestamp"></div>
+                </div>
+            </div>
             <nav>
-                <a href="{{ '/' | relative_url }}">Home</a>
-                <a href="{{ '/journal.html' | relative_url }}" class="{% if page.url == '/journal.html' %}active{% endif %}">Journal</a>
+                <a href="{{ '/' | relative_url }}" class="nav-btn">Home</a>
+                <a href="{{ '/journal.html' | relative_url }}" class="nav-btn{% if page.url == '/journal.html' %} active{% endif %}">Journal</a>
             </nav>
         </header>
 
         {{ content }}
     </div>
+
+    <script>
+        function updateTimestamp() {
+            const now = new Date();
+            const day = now.toLocaleString('en-US', { weekday: 'short' });
+            const date = now.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            const time = now.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('timestamp').textContent = `${day}, ${date} ${time}`;
+        }
+        updateTimestamp();
+        setInterval(updateTimestamp, 60000);
+    </script>
 </body>
 </html>

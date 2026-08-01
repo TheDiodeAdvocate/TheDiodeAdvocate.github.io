@@ -6,11 +6,15 @@ permalink: /journal.html
 <div class="section-title">Journal</div>
 
 {% if site.posts.size > 0 %}
-<div class="entry-list">
+<div class="cards-grid">
     {% for post in site.posts %}
-    <a class="entry-row" href="{{ post.url | relative_url }}">
-        <span class="entry-title">{{ post.title }}</span>
-        <span class="entry-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+    <a class="card" href="{{ post.url | relative_url }}">
+        <div class="card-header">
+            <div class="card-title">{{ post.title }}</div>
+            <span class="card-icon">📓</span>
+        </div>
+        <p class="card-description">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+        <div class="post-date">{{ post.date | date: "%b %-d, %Y" }}</div>
     </a>
     {% endfor %}
 </div>
