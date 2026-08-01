@@ -88,7 +88,8 @@
             flex-wrap: wrap;
         }
 
-        nav button {
+        nav button,
+        nav a.nav-btn {
             background: none;
             border: none;
             color: var(--color-text-secondary);
@@ -99,14 +100,23 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        nav a.nav-btn:visited {
+            color: var(--color-text-secondary);
         }
 
         nav button:hover,
-        nav button.active {
+        nav button.active,
+        nav a.nav-btn:hover,
+        nav a.nav-btn.active {
             color: var(--color-text);
         }
 
-        nav button.active {
+        nav button.active,
+        nav a.nav-btn.active {
             border-bottom: 2px solid var(--color-accent);
             padding-bottom: 6px;
         }
@@ -249,7 +259,8 @@
                 gap: 12px;
             }
 
-            nav button {
+            nav button,
+            nav a.nav-btn {
                 font-size: 12px;
             }
 
@@ -343,7 +354,7 @@
                 <button class="nav-btn" data-section="projects">Projects</button>
                 <button class="nav-btn" data-section="radio">Radio</button>
                 <button class="nav-btn" data-section="misc">Misc</button>
-                <a href="journal.html" class="nav-btn" style="text-decoration:none;display:inline-block;">Journal</a>
+                <a href="journal.html" class="nav-btn">Journal</a>
             </nav>
         </header>
 
