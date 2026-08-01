@@ -1,0 +1,11 @@
+title: "Ivan's Workspace"
+description: "A journal of projects and hobbies."
+baseurl: ""
+url: ""
+markdown: kramdown
+permalink: /journal/:year/:month/:day/:title/
+plugins:
+  - jekyll-feed
+
+exclude:
+  - README.md

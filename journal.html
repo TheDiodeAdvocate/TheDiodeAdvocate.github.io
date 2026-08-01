@@ -1,0 +1,18 @@
+---
+layout: default
+title: Journal
+---
+<div class="section-title">Journal</div>
+
+{% if site.posts.size > 0 %}
+<div class="entry-list">
+    {% for post in site.posts %}
+    <a class="entry-row" href="{{ post.url | relative_url }}">
+        <span class="entry-title">{{ post.title }}</span>
+        <span class="entry-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+<p class="empty-state">No entries yet &mdash; check back soon.</p>
+{% endif %}

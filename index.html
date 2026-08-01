@@ -58,6 +58,22 @@
             letter-spacing: 0.5px;
         }
 
+        .blink-cursor {
+            display: inline-block;
+            width: 0.6em;
+            height: 0.10em;
+            margin-left: 6px;
+            margin-bottom: -0.05em;
+            background: #01fc2b;
+            vertical-align: baseline;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            50.01%, 100% { opacity: 0; }
+        }
+
         .timestamp {
             font-size: 12px;
             color: var(--color-text-secondary);
@@ -241,6 +257,74 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            max-width: 700px;
+            width: 100%;
+            padding: 32px;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--color-text);
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-right: 30px;
+        }
+
+        .modal-body h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin: 20px 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-secondary);
+        }
+
+        .modal-body p {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        .modal-body a {
+            color: var(--color-accent);
+        }
     </style>
 </head>
 <body>
@@ -248,17 +332,18 @@
         <header>
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
-                    <div class="site-title">Ivan's Workspace</div>
+                    <div class="site-title">Ivan's Workspace<span class="blink-cursor"></span></div>
                     <div class="timestamp" id="timestamp"></div>
                 </div>
             </div>
             <nav>
                 <button class="nav-btn active" data-section="home">Home</button>
                 <button class="nav-btn" data-section="cyber">Cyber & Tech</button>
-                <button class="nav-btn" data-section="outdoors">Outdoors</button>
+                <!-- <button class="nav-btn" data-section="outdoors">Outdoors</button> -->
                 <button class="nav-btn" data-section="projects">Projects</button>
                 <button class="nav-btn" data-section="radio">Radio</button>
                 <button class="nav-btn" data-section="misc">Misc</button>
+                <a href="journal.html" class="nav-btn" style="text-decoration:none;display:inline-block;">Journal</a>
             </nav>
         </header>
 
@@ -266,9 +351,16 @@
         <section id="home" class="section active">
             <div class="about-section">
                 <h2>About Me</h2>
-                <p>From the mountains of Virginia, where self-reliance is a way of life, to a career in cybersecurity, my path has been driven by a constant desire to learn and build. I'm a U.S. Navy Veteran, a Sonar Technician by trade, and now a professional in the cybersecurity field. But my true passions lie in the workshop. I have fond memories of helping my dad work on his trucks and learning the name of every tool on my grandpa's workbench. These experiences taught me to be a tinkerer and a problem-solver.</p>
+                <p>Welcome to Ivan's Workspace! This website is a collection of all my hobbies and projects that I like to work on. Think of this as my online journal!</p>
+                <img src="images/about-radio-night.jpg" alt="Working the radio late into the night" style="width:100%;border-radius:4px;margin:16px 0 4px;">
+                <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:16px;">Working the radio late into the night.</div>
+                <p>From the mountains of Virginia, where self-reliance is a way of life, to a career in cybersecurity, my path has been driven by a constant desire to learn and build. I'm a U.S. Navy Veteran, a Sonar Technician by trade, and now a professional in the cybersecurity field. But my true passions lie in the workshop. I have fond memories of helping my dad work on his trucks (even though he still says I can't hold a flashlight right) and learning the name of every tool on my grandpa's workbench. These experiences taught me to be a tinkerer and a problem-solver.</p>
                 <p>I built this website as a public journal for my projects and hobbies—a place to share my journey without the noise of social media platforms. My hope is that my work inspires you to start a new project, finish an old one, or just learn a little something along the way.</p>
-                <p>I want to give a shout-out to the Operational Sciences Group (OSG), a group of friends from my time in the Navy. Their shared curiosity and unmatched life experience pushed me to be more. Thank you, guys.</p>
+                <img src="images/about-workbench.jpg" alt="My workbench, tools within reach" style="width:100%;border-radius:4px;margin:16px 0 4px;">
+                <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:16px;">My workbench, tools within reach.</div>
+                <p>I want to give a shout-out to the Operational Sciences Group (OSG), a group of friends from my time in the Navy. Their shared curiosity and unmatched life experience pushed me to be more. They always championed further education and experimentation, shaping me into the person I am today. Thank you, guys.</p>
+                <img src="https://lh3.googleusercontent.com/sitesv/AG8ngQVD1PVWvCAXc8f5-o7U7lkS8lQtCJHtZMV4xJWHJ-RbPTi_qEb7KjJPOlLCUvxy6x-Bu3PBCq1SPGsWl5YE8yrQAPVIY1dQvFoLd4-_a0VrCy2ZCv-vP70x5xMtb5-IjIas44TNxjtZ9QWs-TyYOLJ5W7DjSXCbKhCzF-u-OgoNi-wU9DNQ2feuvrm4ySBWv6qLP4nnZGIaUefHy9X6qVBTCd_Jys-YsNpz9-XY=w1280" alt="" style="width:100%;border-radius:4px;margin:16px 0 4px;">
+                <p>This website is operated by a <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiGnome" style="color: var(--color-accent);">WikiGnome</a>. This page will remain ad-free!</p>
             </div>
 
             <div style="text-align: center; color: var(--color-text-secondary); font-size: 13px;">
@@ -283,7 +375,7 @@
             <div class="subsection">
                 <div class="subsection-title">Hardware & Setup</div>
                 <div class="cards-grid">
-                    <a href="#" class="card">
+                    <a href="javascript:void(0)" class="card" data-page="hardware-i-love">
                         <div class="card-header">
                             <div class="card-title">Hardware I Love</div>
                             <span class="card-icon">⚙️</span>
@@ -295,13 +387,12 @@
                         </div>
                     </a>
 
-                    <a href="#" class="card">
+                    <a href="javascript:void(0)" class="card" data-page="my-setup">
                         <div class="card-header">
                             <div class="card-title">My Setup</div>
                             <span class="card-icon">🖥️</span>
                         </div>
                         <p class="card-description">Current workspace and development environment</p>
-                        <div class="card-status status-active"><span class="status-dot"></span>Active</div>
                     </a>
                 </div>
             </div>
@@ -309,16 +400,15 @@
             <div class="subsection">
                 <div class="subsection-title">Networking & Infrastructure</div>
                 <div class="cards-grid">
-                    <a href="#" class="card">
+                    <a href="javascript:void(0)" class="card" data-page="homelab">
                         <div class="card-header">
                             <div class="card-title">Homelab</div>
                             <span class="card-icon">🏠</span>
                         </div>
                         <p class="card-description">Self-hosted infrastructure and home automation experiments</p>
-                        <div class="card-status status-active"><span class="status-dot"></span>Active</div>
                     </a>
 
-                    <a href="#" class="card">
+                    <a href="javascript:void(0)" class="card" data-page="wardriving">
                         <div class="card-header">
                             <div class="card-title">Wardriving</div>
                             <span class="card-icon">📡</span>
@@ -331,7 +421,7 @@
             <div class="subsection">
                 <div class="subsection-title">Input Devices & References</div>
                 <div class="cards-grid">
-                    <a href="#" class="card">
+                    <a href="javascript:void(0)" class="card" data-page="mechanical-keyboards">
                         <div class="card-header">
                             <div class="card-title">Mechanical Keyboards</div>
                             <span class="card-icon">⌨️</span>
@@ -339,7 +429,7 @@
                         <p class="card-description">Mechanical keyboard collection and switch reviews</p>
                     </a>
 
-                    <a href="#" class="card">
+                    <a href="javascript:void(0)" class="card" data-page="workbook">
                         <div class="card-header">
                             <div class="card-title">Workbook</div>
                             <span class="card-icon">📓</span>
@@ -350,50 +440,47 @@
             </div>
         </section>
 
-        <!-- OUTDOORS SECTION -->
+        <!-- OUTDOORS SECTION (commented out for now)
         <section id="outdoors" class="section">
             <div class="section-title">The Outdoors</div>
             <div class="cards-grid">
-                <a href="#" class="card">
+                <a href="javascript:void(0)" class="card" data-page="beekeeping">
                     <div class="card-header">
                         <div class="card-title">Beekeeping</div>
                         <span class="card-icon">🐝</span>
                     </div>
                     <p class="card-description">Apiary management and honeybee keeping journey</p>
-                    <div class="card-status status-active"><span class="status-dot"></span>Active</div>
                 </a>
 
-                <a href="#" class="card">
+                <a href="javascript:void(0)" class="card" data-page="nature-photography-and-id">
                     <div class="card-header">
-                        <div class="card-title">Nature Photography & ID</div>
+                        <div class="card-title">Nature Photography and ID</div>
                         <span class="card-icon">📸</span>
                     </div>
                     <p class="card-description">Wildlife photography and species identification</p>
-                    <div class="card-status status-active"><span class="status-dot"></span>Active</div>
                 </a>
             </div>
         </section>
+        -->
 
         <!-- PROJECTS SECTION -->
         <section id="projects" class="section">
             <div class="section-title">Projects</div>
             <div class="cards-grid">
-                <a href="#" class="card">
+                <a href="javascript:void(0)" class="card" data-page="ender-3-v2">
                     <div class="card-header">
                         <div class="card-title">Ender 3 V2</div>
                         <span class="card-icon">🖨️</span>
                     </div>
                     <p class="card-description">3D printer modifications and prints</p>
-                    <div class="card-status status-active"><span class="status-dot"></span>Active</div>
                 </a>
 
-                <a href="#" class="card">
+                <a href="javascript:void(0)" class="card" data-page="bambu-lab-a1">
                     <div class="card-header">
                         <div class="card-title">Bambu Lab A1</div>
                         <span class="card-icon">🖨️</span>
                     </div>
                     <p class="card-description">Multi-material 3D printing exploration</p>
-                    <div class="card-status status-active"><span class="status-dot"></span>Active</div>
                 </a>
             </div>
         </section>
@@ -402,16 +489,15 @@
         <section id="radio" class="section">
             <div class="section-title">Radio</div>
             <div class="cards-grid">
-                <a href="#" class="card">
+                <a href="javascript:void(0)" class="card" data-page="aredn-microwave">
                     <div class="card-header">
                         <div class="card-title">AREDN Microwave</div>
                         <span class="card-icon">📶</span>
                     </div>
                     <p class="card-description">Amateur Radio Emergency Data Network setup</p>
-                    <div class="card-status status-active"><span class="status-dot"></span>Active</div>
                 </a>
 
-                <a href="#" class="card">
+                <a href="javascript:void(0)" class="card" data-page="field-day-2020">
                     <div class="card-header">
                         <div class="card-title">Field Day 2020</div>
                         <span class="card-icon">📻</span>
@@ -425,7 +511,7 @@
         <section id="misc" class="section">
             <div class="section-title">Misc</div>
             <div class="cards-grid">
-                <a href="#" class="card">
+                <a href="javascript:void(0)" class="card" data-page="coffee">
                     <div class="card-header">
                         <div class="card-title">Coffee</div>
                         <span class="card-icon">☕</span>
@@ -433,7 +519,7 @@
                     <p class="card-description">Coffee brewing methods and bean reviews</p>
                 </a>
 
-                <a href="#" class="card">
+                <a href="javascript:void(0)" class="card" data-page="mtg-lists">
                     <div class="card-header">
                         <div class="card-title">MTG Lists</div>
                         <span class="card-icon">🃏</span>
@@ -441,7 +527,7 @@
                     <p class="card-description">Magic: The Gathering deck building and testing</p>
                 </a>
 
-                <a href="#" class="card">
+                <a href="javascript:void(0)" class="card" data-page="props">
                     <div class="card-header">
                         <div class="card-title">Props</div>
                         <span class="card-icon">🎭</span>
@@ -449,7 +535,7 @@
                     <p class="card-description">Prop making and costume fabrication</p>
                 </a>
 
-                <a href="#" class="card">
+                <a href="javascript:void(0)" class="card" data-page="warhammer">
                     <div class="card-header">
                         <div class="card-title">Warhammer</div>
                         <span class="card-icon">⚔️</span>
@@ -457,15 +543,23 @@
                     <p class="card-description">Warhammer 40K and Age of Sigmar hobby</p>
                 </a>
 
-                <a href="#" class="card">
+                <a href="javascript:void(0)" class="card" data-page="authors-and-books-i-enjoy">
                     <div class="card-header">
-                        <div class="card-title">Authors & Books</div>
+                        <div class="card-title">Authors and Books I Enjoy</div>
                         <span class="card-icon">📚</span>
                     </div>
                     <p class="card-description">Reading recommendations and book reviews</p>
                 </a>
             </div>
         </section>
+
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal-box">
+                <button class="modal-close" id="modalClose">&times;</button>
+                <div class="modal-title" id="modalTitle"></div>
+                <div class="modal-body" id="modalBody"></div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -494,6 +588,39 @@
                 button.classList.add('active');
                 document.getElementById(sectionId).classList.add('active');
             });
+        });
+
+
+        // Page content data
+        const PAGES = {"hardware-i-love": {"title": "Hardware I Love", "html": "\n  <p>This section is for hardware that I have come to fall in love with.</p>\n  <h3>Yubikey</h3>\n  <p>\"Did you know 90% of all internet breaches are due to stolen login credentials? SMS, mobile authentication apps, and legacy one-time passcodes (OTPs) are vulnerable to today's advanced threats.\" That's a snippet from Yubico's own site. I've been a YubiKey user for two years now, and I keep my key attached to my car keys. I highly recommend using a YubiKey, or any hardware token, for your multi-factor authentication.</p>\n  <p><a href=\"https://www.yubico.com/store/compare/\" target=\"_blank\" rel=\"noopener\">Compare YubiKeys on Yubico's site &rarr;</a></p>\n  <h3>Rocket Book</h3>\n  <p>As a theology student, I take quite a few notes. In this endeavor I've explored numerous note-taking options including an iPad, pen and ink, and a laptop. I've found that I enjoy the physical feedback of pen on paper the most. I also enjoy hoarding my notes, and the Rocket Book lets me digitize them quickly.</p>\n  <p><a href=\"https://getrocketbook.com/\" target=\"_blank\" rel=\"noopener\">Rocket Book site &rarr;</a></p>\n  "}, "my-setup": {"title": "My Setup", "html": "\n  <h3>My 2021 COVID purchase...</h3>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXGVftlRtpM2ZslD144BEa8uwtbs4kfSIvQpn2KVYgygk8GkSxH603F2umvwJ9vW6mJxExgDKfVwgKFWyqoATH_hNIlp8VyzFlP6YRzW_2uztz3kwxqRpvDUNMWGoAMOs9FNfwPm4ibv75ZLXv5d3YbyN24FLlwRMV5OcVS5BEY4tvHGH_FwR80-dHijknptPOgKUVpEzuJeoHzGngsgRY1hK607_E2TgHTs6l0Oxo=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p>I always forget what CPU I have because this is a pre-built. I know, I know, a PRE-BUILT?!? Well, I wanted an RTX 3070, which was the only way to get one in January 2021.</p>\n  <p>I have since added storage, replaced the Kraken cooler due to a bearing issue, and upped the power supply because I felt it was borderline not enough (650w to 850w) as the system would regularly lose power during its early days.</p>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQUU6XgKwmXy4tvnhYgrJOQL7t3oQ5SXrv4Nn2ayeJBk0YOSmvQHf-_QXKNivZDPtqNE5aYA0JTZ9fPqNJDOxVoLhOcaTtfP-VC9rowlHcKN7OXi-flBWSY18PqRq0fZTryFvAdqx85j5gq2k7LqDD7SKB391kqjRVMcuM3j19ZpPwtCdzRPD2XvcZ5G6vwXilaHnzGkFPUBgzc60kXWEY-8ldJwk9UgK2U-US_e=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\"><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQWgsxvgokSGhegYzZZtZ-AhZTfx30seWzFMNvDrZOWJZtYfJHIHXYGVqhj5Rm0FOersvSynJ6VWIjevNK-5aiHryg-CXbTWHCIkmBcGFmndLmiwqmbUSIf3cXErrSkM17MqGRWwaBPwZMBCFAiglD28UxB0dEfgd7r78K6Q45muIKk0Ef6hUA2VFuFtOTredQ6rf7OWduAUW89a85ErRFGNaayepgrk267nGZ31=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p style=\"color:var(--color-text-secondary);font-size:13px;\">Audio-Technica AT2020 &middot; Schiit Stack, and Beyerdynamic DT-990 Pro 250 ohm</p>\n  "}, "homelab": {"title": "Homelab", "html": "\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQW3aMLQu4vFG9-VGV06vqKLoGENgeRj3Ta9mxnuO1jK0qfrXCDbThHVayuaIIFGyKWtgsRmMQAJvoWh2C-AgEkZA-18b50N0DnN3szhP5URot2GLLkqyejFWNgq1Q4_Q85UaoAkmZVhEEHZHNenQn8amIv4-VsrsAnEWZIoJMyHcMQU3JN71dvAinznQlXmCaG8PhqORZfUU9nxk4WGWwg65cEu9--sn-AOmtw3Gdk=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p style=\"color:var(--color-text-secondary);font-size:13px;\">Lab configuration as of April 2023</p>\n  <h3>Current Lab Configuration</h3>\n  <p>I owe a lot of this design to NetworkChuck, as his video on pfSense firewalls really inspired me to play around with my home network. The StarTech rack (12u) sits in my living room and provides excellent background noise and ambient lighting...</p>\n  <img src=\"images/homelab-rack.jpg\" alt=\"My first time building a rack and setting it up\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p style=\"color:var(--color-text-secondary);font-size:13px;\">My first time building a rack and setting it up.</p>\n  <h3>Early Stages of the Homelab</h3>\n  <p>I did not have an end goal in mind when I decided to get all of my homelab hardware. I started this journey because I got a free Cisco Catalyst 2960 from my professor. I ended up buying the two PowerEdge R420 servers on eBay for ~$200, and I haphazardly put it all together because I couldn't let the generosity of my professor go to waste.</p>\n  <p>Now that I have had some time to learn and grow, the homelab has moved into a dual-purpose role. It houses the hardware controlling my home network, and it contains the servers that I am using to learn.</p>\n  <h3>Topology</h3>\n  <p>Just recently I got my VLANs working right. I intend to segregate my R420s and run vulnerable images on them so that I may practice and learn. I would also like to host a PiAware, Octoprint, and an AREDN Node, so I will create another VLAN for those too.</p>\n  <p>Just recently, my Unifi AP quit displaying my guest captive portal, so I have added that to my list of things to work on.</p>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQUlRpk-9mjC44VsZFGIsK-fXiF1Dki04agNwtD9QU1h-EXWEK_4hYiqltqyeU5W2pYG3_mHufTZiJ-SEkTEBiHcfSIzdX2suorJzKXTK67njpLSDu1UCk8dbqx03-HjDMCCzqosis8InVf5VFDxl9X3qUuZC6tU0-2NB4nS8qg1AuqjSxeaEJCzlayfxtQ1hCSkaax2t8-V_V4R2CC1DPgYvWn4sfh-M9tORpKt=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>Mikrotik</h3>\n  <p>I have played around with RouterOS, but I really couldn't get my VLANs working the way I wanted to with my pfSense. I eventually booted into SwitchOS and prefer it since my pfSense handles the routing. I found it confusing to use, but I also don't spend a lot of time at work playing around with switch configurations.</p>\n  <p>All in all, I think the Mikrotik is an excellent option for a homelab. I had to pay a little extra for mine due to the fact that I purchased it during the COVID-19 pandemic.</p>\n  "}, "wardriving": {"title": "Wardriving", "html": "\n  <img src=\"images/wardriving-rig-case.jpg\" alt=\"The rig set up on the balcony\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p style=\"color:var(--color-text-secondary);font-size:13px;\">Setting up the rig on the balcony to acquire a steady GPS signal. The construction of the building made it difficult to hold a signal during setup.</p>\n  <h3>A Constant Work in Progress</h3>\n  <p>This is one of those projects that has occupied my workbench for far too long. I originally wanted to present this at the monthly radio club meeting that I attend.</p>\n  <p>Early in my IT career I came across wardriving during my study for CompTIA's Security+ certification. I was immediately interested in what I would consider is both a dying and old school hobby. Wardriving is only illegal when you cross into the black-hat territory of network compromise, DoS, etc.</p>\n  <p>A fun way to try the hobby out, and to see what is around you, is to download WiGLE Wi-Fi to your phone and turn the scanning feature on.</p>\n  "}, "mechanical-keyboards": {"title": "Mechanical Keyboards", "html": "\n  <img src=\"images/mechanical-keyboard.jpg\" alt=\"One of the boards in the collection\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>GMMK Pro</h3>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQUfIwkgfPw6YchnDCfBZYh1o0difO-lSYQt9FhKOfqpSPNUaSDeazCxTv2geQ2eJPjKkWZha418TeW9GZhKePMAJx4s5ioVM7JMRihduRG8B9e9Dqos279yIT39Qo0V0OeX1A41gayHPdnk4nOWHQ0rLHiNspx4AHBC0Bns-e68LvtdRocFwfMzbQatWFsdHcfU8R2GkeTOGay931fHu7oCmeufVBdl5J82jzmQ=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>Tofu 75</h3>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQUuEdGuWuq8eiLgNJTNS5AR3Fvm9RtZaj4XH8uIQxyIxKvVfW-HKSRCRNxdwxIKr9wbpWHdpK8-pEdm_ANi06tDmmfzhcGspDpJ41AkOUX7VX2C-kl2huYa16byFDzn83hjou7smua3T1hgKQ6eAIUtWxkzed_pDBrajteScniHMXqaduWqwolVNlDJt-E4zh9XAaGJCx0VWSk7BVezlfOwnyZxH-gYbJte0d7bi6w=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>Tofu 60</h3>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQWJQpWiPeS0f7iSm9Gb07Y4ugqIG2elYNuTbSMxgxQE0HDannn0J8pEqVKiMQNaJJU7iJTzs9ZayQgESrC8VC_OPKMhHkg3ucamjPM-xGbIhpMZxGT_lpy8kWRAhan_TtVnyvpm_s-L9R2g6UT9WlaqKt3oNnE72-XyR0c9CbCW41PaqrdX9H3hzBI0jccYmWDBn_MwU4o3o4QOUUlDidkKy5D1NjkEewj1SNE15Ok=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>5 Degree</h3>\n  "}, "workbook": {"title": "Workbook", "html": "<p style=\"color:var(--color-text-secondary);\">Technical reference and learning documentation. This section is still under construction &mdash; check back soon.</p>"}, "beekeeping": {"title": "Beekeeping", "html": "\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXlagFoo4330JrIf9WPPhnv13KxFWl0FnPBkHIlOWUIgqTsGmdy8LFKQBtCyePP5kM6uBJ2cOfiTjKu7fAmQT3V_VH7r7NzU03RnYJc-kRQBtnfiGNPiUX005drGlellZ5yz0SmMdqY0rcusla6xFDTtTwbbc_Juw52Zp1pjDddoO9lASHFjyIg7EzeZTAXdfVayhsaFx0SFP-Nce8raslvHdnOBcu-VMLWaFNg=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p style=\"color:var(--color-text-secondary);font-size:13px;\">Working a Langstroth beehive.</p>\n  <p>I am not actively beekeeping anymore. Living in an apartment will keep this page dormant for now.</p>\n  "}, "nature-photography-and-id": {"title": "Nature Photography and ID", "html": "\n  <p>All plants and animals are identified by me (not a professional) &mdash; do not consume anything you find in the wild despite what I might say in the description. Forestry and tree identification have been a passion of mine since I competed in FFA forestry competitions in high school. Now, I spend my time logging plants and animals with my wonderful girlfriend. Most of these photos are taken on a Google Pixel 7 Pro. What I do not know I confirm with the apps Seek and iNaturalist.</p>\n  <h3>Plants</h3>\n  <div style=\"display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:12px;\"><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQUwJ8lHzA2_izYB5xg8B9HqBSyffIElfnkTorvCQazoUlNNJ2zu6d0CjCRJMwMNWahY5olbzvuYAR83N80HEofXvI2mPc9Rh1kR5CNXJH8kzD4mD0vPTcC5sHFh5BtmBe3gguV2NpbOtvOZeXQlgwTgkyrm-cUDlI-Ik8870Ox13i08TB8k3BqTOkJT6qPYQzU_0vpyUZLfF6vCQLIXmmPWBftFNMTNzq9kGQF1MLE=w1280\" alt=\"Grape Hyacinth\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Grape Hyacinth</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXETsaN_N6ymKKrUmjZt_QQLoTUgElfEssJz1EagTaxTQq9-_q88hg0M-dlFUFdAfItvCTa2mULiHIWT7SDdARh9EaUi-o_wn9TIhaRTKzQDeMX_YN6EEsOquIxcfNyoe2dY-faN-5j4uJmF8C7qHnK5-ohmoLLSceS69Ifu2AUspwmouxLNWQgZi8PsLGMF2wIf46v0K8dFOhYPdYfP656iJojWZfgwUqQb7Vu5To=w1280\" alt=\"Lesser Periwinkle\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Lesser Periwinkle</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQURnOZllFNZ6yxV1ZiPIn1OLyANjZeAuLQFyn6cZvjbXQfyFhm-iHN7Fkij7ntfiVXnkXOQiuCAgnt79q1RmQ8pXmGSehXd_MjkByjVKh0bf1FgF54L64M7eH2hegdYu055jDsnAvcm9Ro7MfWvX-iLEx_PV3DM9IaKYxokDDeFI0yT29mzbii0bIkLYeydgqkhsorYMs3UxdE13PkN2YTn3cleFECaczLqbDAk5yA=w1280\" alt=\"Warty-Cabbage\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Warty-Cabbage</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQWoPWZCZcG0dAWKCwFQzp1j4czQc0rpxGZbf3BMVHw0WE8mj0zYeXP4TNurNuYEm197N4qB3U4eSS23F4AkGwzgHqUTxbNaI4tte3N-wZfBKJP3Pr9ctxM8zFcvEIhxew59NNiHpD799k0xOzh8SvSE9puw6hEu6KiXjBpkrJDG3WhEb2bRyHsVRGvygvzzMOo6GFV0Iue2qdVdrCV7td5lbqWBimVWiZ31MgSyi9U=w1280\" alt=\"Great Mullein\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Great Mullein</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQX_RsZN-hLlGRsEpY-gowIVlakBI0S-iYguZGHDON33duIahRL-oLkRxiQRnTO0Yx88GY_cxO_q7YITdKrt1HEZLLJZLI4jp6-G0UD5KV1rVgb_ZbEXqC0i29jZC8677jGslZHV1yFHDNum57fOly874BKKQztVAsBi6cNlS8ljGlxNciFVOmIVQnXL9WRT_GPU0AixHeyPcHsC9KRS0baWsxl6RjC2PqEOEVKVFY0=w1280\" alt=\"Lesser Celandine\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Lesser Celandine</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQWcdTIuPntYvaiBpYD2Jt4qpi4dSVEEy1szSfDQVPttnst0wCOlMvSS2AKiOldzFsNikojS-TCPGykvZlmmGXBAhnRHDDPdwjs784VLsH22H243AK-no0e-1OZEVO9PBv2j5MqNaKvF7pEVvBIRuWnl9vxhLVbKNjSWFfdwf2RPy5-ydjGyy4AZsMXMUJIAJ3dbaC422coWPg0msCyZTp5BozuH6H2BFEfOQ2HrRv4=w1280\" alt=\"Wild Daffodil\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Wild Daffodil</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQUs-_Wuiw_6bYeGl7ip6WfFbowFOjjpB5EfqdG_W3BiUvGeqkRuoLaSrTEFXHtYACi9nGwS7OYrZ4nLXeuKg5DInlttIsb6iN0Am_YFkNdv0LUHPsRxRmKgWnY20gCijobU6o5fyNKfQ6xQfBMVfIBNp6XyvOFRfTT9ycbTO2J7skitI9oMIXmmAB0Vi85Q1eHrcgL5Uo4ETDwhw6N9skA-aYpmsMhMB6bH5XLL=w1280\" alt=\"Red Deadnettle\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Red Deadnettle</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXI2Szpqr6rJBmG2o8rNuybV5RbsXIjgXlwykfJ-MC1ZItg8kVDQ4j4u9BFNF_B3yzxTHIT0s00MXK3T5Jw9g4AIOm_3V0jrmJL-WnDHJwVIr2YSi38imCDeGcuzTn-qU2s2OeZCWZlqfvGY6rmI98DJEOus-mhfwp8STABHF1rcByn8ZXNzuppD0a7FT74kP8L9NRbfPqr_JR35x9fHF5wIt5fAHTt62WuqFxi3wY=w1280\" alt=\"Ground Ivy\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Ground Ivy</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQUS67hxVa2i5ljkjHE4NVou4j-eRla58uKy22qtKKgc5myHWXSRqVfzwLTpiaS1ytSggKQD6JfoY_l3AbJGfmWG-n1a_q4AP2plhXpsA_WsJTgm2O7FBJa2I9VJP2B3tJfYeJb2jS5DIfU6qz-KzrubY1wFqwTds-2AWDbr1VcGMSdubbVgcbD1x-jkv4d9-On7kf8xVLiqidDKJrAmIrtkt1jm82m14q_M1M8NZXU=w1280\" alt=\"Common Mugwort\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Common Mugwort</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXOPJzOJPqCFdL6NsdgBY6pFiuwjK2YS5Q93nQ33fFqzfDKytnRqLIB-YgBxw_iztY--hPzKULaUAGKsI_955CdJsxQJyS37aPU8OXe16n7XoKBI3TtUB9OTygvNt0YeXQvEBnq_nfe_h4jKHJAysMcbSUiQvvX4llcQN-ik0qYoxyngQWX9jeAcVdpqWfudrF58ZqnEeXvuis_C1Q2-eup4Xd2B1c4Men7ZCB7lFE=w1280\" alt=\"Broad-leaved Dock\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Broad-leaved Dock</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXEBZVMG2T2sMcIYE1I8o7R5FG56uiVCQGKS3eHGb5nFjzNPGhUWCIqRvgkuRNtuosvQwDiW4kH9qKI4gXSdQsihv1VvBejO2kS7LB2ohIqbgdRwr3yFrVVgOvgevgJGbwUPeyGrsk1_QI96OWIfK0tkYJ80ZguL46Ef8B9P9_sCFEWZxFdz5M9iXcVUDGeC-71ZaJFIZ8ddmb6Wo-YXzdY-EJZ23P_uCHeRpSRIHM=w1280\" alt=\"Bull Thistle\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Bull Thistle</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQX01VVS820BELfDRHp5z1w6UL9BV40Kix-oLjX5THQVZ0CEeS9_cEcrmZwsuwKtlzDNkz7z-u-f1dZKPBO--zU5kNi15fnxdHqSnbaylEmI8w_9NzYsGWqFaR89Vb9RYn5GUCmna0JSrxF1NE5y7avA9Ku4N-bNt_fQJfRAymZecUxpInE8NWYIbsPDa1wJej3VrQl6p-MMnT8dH5s1NJGNMyM6aibcFKWK6dv4dJc=w1280\" alt=\"Common Dandelion\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Common Dandelion</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQX-xQmsQsO21Lh66NhGdIHppq5QrrFZD9PCFmIUb611oH4072tIlSuYKE5QJpK0DSfh1bAYN0qQM-ED5IEuOQ1zm-a02Y5iZ1KzpGE5vFlMPeOAlo1D469z5UJF6VJ5gjpxnwoaxHmXJZqzLP8xkxxScrKRErj5S_TvtNJiM0o5p91DUyJNjLLlgpXTYlPSeSLvmVgE2sKYF7b7PeJyPyl5N_bUmmi3Jqt6OE5X2Sw=w1280\" alt=\"Canada Mayflower\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Canada Mayflower</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXHR39CpxDyldj70_JhEnVyTOaYmFO1fW8TcF2T9s5M4Xg2al8PnvUN1Uehm0-3rA-OOku4m79U6s07rGwSDFWRl0Hng0pDXs7XLc1d2lom2dlBjspx1UeyX_TFzHxAc1t1_hf2yekkaJh-UlJ8Ng_Yl0vZMhkG7o1WEyY68KdCCUv5QRE7zDzNtvL0EcO4z_U3-UNDw2tYRFwsHyyzMC9bZSYZNGJYDLs1VMAFiS0=w1280\" alt=\"White Clover\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">White Clover</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXlHqwDj3Qoy2eauSmO_4b8Q4WLRqAeY7mt_sctMjnV1Xnstcmpefxwcsgex9GwirvV21fA33Q5U0yOjKDYeTls1Eu6DpEnIfTTaJ1c8NEP2sL2R_h_pEIpxFnwwoBFMEUC98LVDgZPC1gUBGjSDM-SmIMYjNguNXdJnjW7YYnZcmuum366deZ3u9yDtADu_3GPrIFH5gue0rbnWGGb5czLj9enyPS8sZgHWpcF7CU=w1280\" alt=\"Wild Garlic\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Wild Garlic</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQV5iAEmFjGw3lSMxHO4SaWGHWDw5SFlNX948zMZ4Xp4PVeYUgfxtvfqB0KxJ18KP1EpwYMV-XgJ0mK76VPIudp-hpjKZNktRpoKgvQG4HruYkVJXiJK9V2FONYVpXpNhzycEZ8gKCKPEoxJmFY3AfHqJ1k5hVW6jU33FcBYPvMTzJ6BPr0RNFJhQSzsMbz1T4VO4Y9wxIvhEFyksMCUYHRR1OHqACA0cwCRAWIq=w1280\" alt=\"Blue Violet\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Blue Violet</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXTX6K0e0ocy1eVW6vX310LJbfnJHkmJD5AcNP6TJSHiqZ83mMAK4c4GhESa136d_OuDW42UAY-79mB6s_1AXEZS3Z9l2gwo5Lxklvi6rBwTeaKA-G9ffII8Cil12b0qgHHFb71QKnus1u4PT1VRydMKmAgkhLEDtgmVReVFn6TQsSETKI7rcPquTJpOSjw4jR87FwcLPHRa9rwku9wviijfQPZu_hPIqs-e6tl=w1280\" alt=\"Poison Ivy\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Poison Ivy</div></div><div><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQWxOG8QqryetzlyhPX-12kgFYqsLua794y2_u0FX3_r1bzY3-DSVQuYKX2R44w6eMd2k7xJ8ly8gBqGsorpA6g4gMEA4FMASpUcXnY-L5YztGs8oA8RAyGkLsDqQtzAZ5K3GOYmGWT5HFYf8Ndn5ESYEMixPanYMHDkh7XA5mZgwpkhjMK1utMraJBP34NitQt9tv0AcflZAxsojhl67GZvk_1Wi2Ej7VKzEbjzYO0=w1280\" alt=\"Virginia Creeper\" style=\"width:100%;border-radius:4px;\"><div style=\"font-size:11px;color:var(--color-text-secondary);margin-top:4px;\">Virginia Creeper</div></div></div>\n  <h3>Birds</h3>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXzyV1QC-VmuwNbHaKLpptuAEelVve633YdLwHXv_GDxf_2yT9U6Y-CHsT3Z3bWvlke9NP6shiMcdRJMgdDTgqKuxdc_nNj9vkB29CGvEC_Atl-EkEh0Z3I0h4ZPlLjBgMxgED5iQ_xSbpbumWwAZBy4WbpTlMnJP5lVXcKv26CBI4NaSkQJwXmHFs_EmgafQgvfEsLIFrgxiLwPODicOaPhyf9PEVp2ze_bWpH=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\"><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQUIdqmKjZGzs7Isrp-eWkrsn0SBfXrDf5M848CLw8464WAuYjQboLedhpKWqoibcDbERtmVEgMeoKR3RfO5668F1R1oYWSLrUrgZZ2GdaL0sjkwKSN1YcSJVjun0wS8DNSfQor3AeuriXNs5ohvGmPQICroViG-B9KsmpbVpMeH9p-4ATwowZ1rSVqV7RHgLV9RQJKYPTEkuHXPcf3JUOt9be2e6E3F9yhqHG6q=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p style=\"color:var(--color-text-secondary);font-size:13px;\">Wild Turkey &middot; American Robin &middot; Savannah Sparrow (coming soon)</p>\n  <h3>Fungi</h3>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQW3-6asFoQV0lGbG5glc4Yrk-0LmOX6Cizsa1kqJEcoZo-RGT0Dp4RBCy5QIwf2QTx-UZhxWIPeYrDDpIlqmlYFv17rXtoah4UTcKhF_be2Ku7QJ33rCUOXGk3tgDeyaAZRnIenfGCCx6cGBQAsxVzYjEU7VEMJMwM0oOMhDhbuczoU6FfXixsQVZFnC3DK5-ebSWX4dwpcc5VUAcpIP7QegSR_lZNFO2fxRwKN=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\"><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQVAFIMlg2X_lrgsgEcSXWnjZ9CM47dEAEPVA6uhzFwOmx3OUQNnElO9NPfP33IxRSgrwfaAJF--nRVjn68HeZNvnaV0NUldFyy9_0mPcprSdruArEcuH76itNSkRPeAmLL_hCvr8KcZSbt0dVrjecP9kSNql6SOp7vEmaVejzOgwW6gkxsnucoIAMUqL6ggTyZQHJb8_ENcuCtR-ZqWyfczxCKWkn_QR6O_47ubI9g=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p style=\"color:var(--color-text-secondary);font-size:13px;\">Cracked Cap Polypore (\"horse hoof\") &middot; Brittle Cinder</p>\n  <h3>Other</h3>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQUyr1lXPjDQq3gFKawA_-DYUhl_Hv_6YgGl9TShAnXtkrPLIrkwYyy_NaN_tDE-3Pbbi44QQs27H12CanM9-g20j2pjctO-Og-iIj_jEn2TVkLxdPMjHdIMAsDouIreTQRUZn4EG8II5nnTSwFbOmKIV8PBS8anfhIf2U8TOgQHJ80J74YVZ6nvIVMAwPzPDt_w1064ZOuRdzrUcTQHX9b8yfZ9hW3QXdJ9Xajg5Lk=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p style=\"color:var(--color-text-secondary);font-size:13px;\">Rough Woodlouse</p>\n  <h3>Insects</h3>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQUdqSdYCWlM9A0OIXfs0Gz1yfgJh56yQLJ3gaSnriQ9nUvTDgh6j1LQ1XYpC5cX8U8rAKF7x7izxfZxvMA5vl1NCGoseMueFZV_m18KPufy7EADv_6GrX5690psgwsNT12hi9pMAeI9CBdrf9ZROEA4w0GjOjKfFptjTEdR0m8UiVI4wr0cnKiiaRDfKm-Ja8b1U-4dekW-5IBv329lpZGMf4GOmurqUoBkZYAe=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\"><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQW66ZkGA2cTjIx7_FfKu4z8o6YfR4TpLjOkneRKh4A-ye3OVbzygOm2XI1kDUJrlupk6_TWsQfIGz6G03a-bKUG352F_0tf5tr33yhGSW7YOae3-mmi_4gbFimRCFWN_Dd3Gee7JbbpQ4tlIlgHXM-vC9562Pwblg-zpjSzHgGQ3TpUjxIB-bQNn19UiIQ6Jk2oZZPbSBiEggBivkc6-Amh_WFszmj108ny9aDqHyM=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p style=\"color:var(--color-text-secondary);font-size:13px;\">Brown Tail Moth (take note of the two red \"stop signs\")</p>\n  <p>Brown Tail Moth Rash &mdash; I got this from being in the area.</p>\n  "}, "ender-3-v2": {"title": "Ender 3 V2", "html": "\n  <h3>Changes Made to the Base Printer</h3>\n  <p>I got my first (currently only) printer in the spring of 2021. Some modifications I have made include: a Micro Swiss all-metal hotend and direct drive, a BL Touch bed leveling kit, bed springs and nuts to hold the level, and OctoPrint.</p>\n  <p>Some of the printed additions include: cable chains, tool organizers, and the spool holder.</p>\n  <p>The firmware I use was edited in Visual Studio to increase the number of measurements the BL Touch takes. It adds a significant amount of time to the printing process (~10 mins) but I rarely have any issues relating to leveling.</p>\n  <h3>Some Issues Encountered...</h3>\n  <p>While cleaning out a jam caused by TPU I managed to break the thermistor in the hotend, causing me a week of downtime as I waited on parts. To save time after the parts showed up, I decided I would splice the cable so I did not have to run it through the chains and connect it on the board. This was a bad move &mdash; I believe my soldering job added some resistance to the circuit, and the temperature control never worked right until I decided to run the cable in its entirety.</p>\n  <img src=\"images/ender3-soldering-thermistor.jpg\" alt=\"Soldering the new thermistor in place\" style=\"width:100%;border-radius:4px;margin:12px 0;\"><img src=\"images/ender3-printer-desk.jpg\" alt=\"Just starting out\" style=\"width:100%;border-radius:4px;margin:12px 0;\"><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQVDyvbpR1Pt2TlbNOVFA_t8fCJWzp4BJK-2Xi_4GegSAs-Z1HR-Wk0sS9pDSKm-23aS7xsljZoGw3LgpRV-IpsObvj3cNPA7dko2Py1hWc9v7RoWmKrRXXePQlSs2XO1bpbJEIA6tYFgktEMFn_xQgMKlmsqkNPRSo0JCLKJbKpY7qcpt412w9veDZv20icCQGGItMlcM8lf0q7ETPEWF7hVDBTgFg5rTucQmIM47o=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\"><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQVc2iyrOAcFZeYxonONtKkGSPkL8m3JjARxHS1FeC4gSiifipCzwqtQS47QPVaWiBzD_UiPB9RGNZI60aE89sa816zFBoKAllWjKkHR2MHtPPdHfXHQ0S7OYsYnDzE6N5wPKf-qkanMsVFchlbH0DoVnlCUyl3nMue1iQmHIUlXr7KlULoZwxv9DSO7rv5NTbeWakp9tVtFqjqjFP7VjJ13pYqDmckZIE0gQNZcbts=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <img src=\"images/ender3-tools-sockets.jpg\" alt=\"The tools that live next to the printer\" style=\"width:100%;border-radius:4px;margin:12px 0;\"><h3>Three Steps for Success</h3>\n  <p>1. Level your bed. &nbsp; 2. Calibrate e-steps. &nbsp; 3. Calibrate z offset.</p>\n  <p>These are steps I wish had been emphasized more when I was starting my 3D printer journey.</p>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQVk5SqYLqBC3fvL8ge-_o59yVO0AoozY5zPe1cg5HB0zb1FuDZEpxAYNe1yJL_HU9pOvDTApREf6dDpfAluPHWDgifAzpy70xQgOTMAYtO21DmZo_um8ozRonCZttOCToQQotSmrp7-iiXNIJEpFI3cdFBeW6NMDdu0--KOfx5kR0VfsxLCYVZVvtL7=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>Socket Holder</h3>\n  <p>This is one of my first prints I designed from the ground up.</p>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQW5IXx14O-7JAj6U1ixAAUP80hSk-Z2D---JWCrQMAM_FX8w9Ozp_H-fBS4NBcXYvxUjzkdozgUeMQ3moLMWClZi74B94am2ZTLCPFHcMxe9VV6IR4EcgGDcuc-LNPeDbRS4HczJiLwq2lnfXXlzgJeeIQVcjcBNpCKC6F1ZjsoTSTf8BpLwemmtjiDfBm3Yxn1SVMoDqmiEJc-OvCnQfZiMBQBwm4w2fgUZizt=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>Modular Wrench Stands</h3>\n  <p>I pulled this file from Thingiverse.</p>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQW_xlUYM0yT7hiMrUCChmxUBOZuUeLqSBb6QK0aEf3iKcw2aeuWLS1qdSxCLBLlv02fhqs2YOirEbmLqRhbG8ZTR1ZNvBeGtIFNNVsT7DeC_W1qEYvUVqfMHx_9FbNHyD8kjoiAEvYB1n6NJAmSZ8FBtpMQtRM5hSh6dxzcZE5zaAxOndZgvR51xBaOZkUd9PxtbIYK3ctdiEBybUWWPw1la-JvDNyhaCn4YFyIyWA=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>Bed Leveling Test</h3>\n  <p>I highly recommend using this print every so often.</p>\n  <p style=\"margin-top:16px;\"><a href=\"https://www.amazon.com/s?k=ender+3+v2\" target=\"_blank\" rel=\"noopener\">Ender 3 V2 on Amazon</a> &middot; <a href=\"https://www.amazon.com/s?k=BL+Touch\" target=\"_blank\" rel=\"noopener\">BL Touch on Amazon</a> &middot; <a href=\"https://www.thingiverse.com/\" target=\"_blank\" rel=\"noopener\">Thingiverse</a></p>\n  "}, "bambu-lab-a1": {"title": "Bambu Lab A1", "html": "<p style=\"color:var(--color-text-secondary);\">This section is still under construction &mdash; check back soon for details on the Bambu Lab A1.</p>"}, "aredn-microwave": {"title": "AREDN Microwave", "html": "<p style=\"color:var(--color-text-secondary);\">Coming soon!</p>"}, "field-day-2020": {"title": "Field Day 2020", "html": "\n  <h3>Photos of our 2020 ARRL Field Day setup</h3>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQUl1cks6uE_k5Gp0rUhmE2UIf79mC9d5u589bmKdyJVGB5MNtn7DC7bZSkjdPc9pG_tnrPUnbscF3peko29JE3nJAwVsrWxOk_8e7TCJvWDsAnKSq3MXkBtx0alUpuop3XnnUGOFSOu_PG1oZ2U0akfdd81DntBF0vVv-vf83FyGCCLUGQGuczalt6Go-c=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>County Comm GP-5</h3>\n  <p>This radio was modified to accept a full-blown antenna. From Florida, we were receiving signals from Europe.</p>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXlt0Ntqf_2tKVz-M1-MjFJ2Ole3XBtngJEsiN79yM_olCKj6IM9ITO0fwoNydQdYN327kgLxGurjQgbmlh8VxdH8XKl4FTtFwH0dtW9NaEVSIFib5Habb2wQoBsqlEK6j5wSMw93SZzpzTr69HQGLxm_QMrTvOg3l8v6eent1m0kM1leZZoYpPs3PFfu690KSn0IUoQVojFWwqQB2ZKh9PSrrAScqbU8XM29G4=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>Setting up antenna using a weighted tennis ball</h3>\n  "}, "coffee": {"title": "Coffee", "html": "<img src=\"images/coffee-gear.jpg\" alt=\"Pour-over gear\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>Coffee Recipes and Ratios</h3>\n  <p>Now if you are anything like me, you constantly forget your coffee ratios. That being said, here are some of the recipes and ratios I like to use.</p>\n  <p style=\"font-style:italic;color:var(--color-text-secondary);\">All grind settings are in reference to a Baratza Virtuoso.</p>\n  <ul style=\"margin:16px 0 0 20px;line-height:2;\">\n    <li><strong>Hario V60</strong> &mdash; 16:1 (480g water to 30g coffee) at 18 grind.</li>\n    <li><strong>Mizudashi</strong> &mdash; 80g to full container at 32 grind.</li>\n    <li><strong>Chemex</strong> &mdash; 15:1 (630g water to 42g coffee) at 20 grind.</li>\n    <li><strong>Aeropress</strong> &mdash; 1 scoop at 6 grind.</li>\n  </ul>\n  "}, "mtg-lists": {"title": "MTG Lists", "html": "\n  <h3>My Magic Journey</h3>\n  <p>I played my first hand of Magic in late 2022, since then I have been hooked. Below are some decks that I have built with my friends. I do not play competitively as Magic is just a fun social hobby for me.</p>\n  <h3>Tymaret, Chosen from Death (The Legate)</h3>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQVJ9Bj86UVlxnC9zeYVBQlCnjIEY438wGUUUGu0lglashD0UZtjtuOdqpWnNtT5RCPLD-ZLwlFjTp4c6C4xIUzAnAVt9ZgtIPvijmKw1bMMd9CmV8Q_nodJ4wYcWe6VZNSi5WoTSRaGQxElZtqMQ6v8wXT0i1OiBMJGsJL60t7fkE9l1UVy46zWYjv6tnGiwa7NM_lijyPCwC2gReODT9Z3qEM7QOM8orOTW8rWd_c=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\"><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXSOzoCVjK-ApmH1Fhirmdbn99ui-fSr-Dwb-ttJdOsymN92wF0A-1wx2Drmcij7FKCGiYKSXRPB03TtX8dOSSHs_-EZYUzNFabu9dEzHwbMB10QQedZA_eauQNUIpkYyaGDiQ8fYywW2Ga8ART4X9QFL2tMkw_N9usIwkWTuZB1AINkkVGCCzok81-eJGPC31KjOY7F75HIfIZvBu1n_U_0BrCX83V5k-Q32ZF=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p style=\"font-size:13px;color:var(--color-text-secondary);line-height:1.8;\">Aetherflux Reservoir, Altar of the Pantheon, Arcane Signet, Archetype of Finality, Ashnod's Intervention, Ayara First of Locthwain, Blood Artist, Blood Pact, Blood Seeker, Bojuka Bog, Bontu's Monument, Braids's Frightful Return, Cabal Stronghold, Cast Down, Command the Dreadhorde, Command Tower, Commander's Sphere, Crypt Ghast, Crypt Incursion, Dark Ritual, Defile, Demon's Horn, Detection Tower, Diabolic Tutor, Doom Blade, Doomed Dissenter, Dread Presence, Duress, Eaten Alive, Epicure of Blood, Erebos's Titan, Everglades, Fake Your Own Death, Feed the Swarm, Field of Ruin, Ghost Quarter, Ghoulish Procession, Gix Yawgmoth Praetor, Go for the Throat, Heraldic Banner, Hero's Downfall, Jadar Ghoulcaller of Nephalia, Josu Vess Lich Knight, Leechridden Swamp, Marauding Blight-Priest, Memorial to Folly, Merciless Executioner, Mind Stone, Morbid Opportunist, Mortuary Mire, Murder, Murderous Rider // Swift End, Nyx Lotus, Ob Nixilis Reignited, Painful Quandary, Phyrexian Arena, Piranha Marsh, Plaguecrafter, Prismatic Lens, Reassembling Skeleton, Retreat to Hagra, Rogue's Passage, Sanguine Bond, Sheoldred // The True Scriptures, Sheoldred the Apocalypse, Sheoldred Whispering One, Sol Ring, Staff of the Death Magus, Swamp, Swiftfoot Boots, Syphon Mind, Syr Konrad the Grim, Takenuma Abandoned Mire, Temple of the False God, Tenacious Underdog, The Cruelty of Gix, Tragic Slip, Tymaret Chosen from Death, Undead Butler, Vampire Nighthawk, Vampire Scrivener, Vampiric Tutor, Vengeful Strangler // Strangling Grasp, Victimize, Virus Beetle, Vito Thorn of the Dusk Rose, Vraan Executioner Thane, Witch's Cottage</p>\n  <h3 style=\"margin-top:24px;\">Doran, the Siege Tower (Treeman Terry)</h3>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQWNTOrreMzsjZYbMQTv-bBP0NvgnzL4nkEN8jBN-VTKDHEWoXjWAidsdY666c8cjNwQK3uoOnRprWkbRrDaApcbn0QIAg8skNjnMc7BV660C2oe6CfSkIJMuypUEdcK-AKth6sPHJdbIAk6Bqnxgj1fRKgE-LfN6lQLWIgbafD6KM9akXrb3xyWzCHkvoDcC2zXuFpnDyAG6jEefTS1Iei2cduEeZG8CnqOJ8Zlb3Q=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p style=\"font-size:13px;color:var(--color-text-secondary);line-height:1.8;\">Ancient Lumberknot, Arcane Signet, Assault Formation, Assemble the Entmoot, Aura Shards, Avenger of Zendikar, Battlewand Oak, Behind the Scenes, Binding the Old Gods, Birds of Paradise, Blessed Respite, Boseiju Reaches Skyward // Branch of Boseiju, Bosk Banneret, Brawn, Canopy Vista, Careful Cultivation, Casualties of War, Colfenor's Urn, Colfenor the Last Yew, Command Tower, Commander's Sphere, Culling Ritual, Darkbore Pathway // Slitherbore Pathway, Deadwood Treefolk, Deathsprout, Despark, Doran the Siege Tower, Dormant Grove // Gnarled Grovestrider, Druid Class, Duneblast, Eerie Ultimatum, Entish Restoration, Exotic Orchard, Explore, Ezzaroot Channeler, Faeburrow Elder, Fangorn Tree Shepherd, Fertilid's Favor, Fight Rigging, Forest, Golgari Charm, Golgari Signet, Haunted Mire, Herbology Instructor // Malady Invoker, Indomitable Ancients, Invasion of Shandalar // Leyline Surge, Kaya's Wrath, Kindred Summons, Kodama of the West Tree, Last March of the Ents, Magnigoth Treefolk, Mortality Spear, Murmuring Bosk, Myriad Landscape, Nemata Primeval Warden, Nissa of Shadowed Boughs, Nissa's Pilgrimage, Overgrown Farmland, Path to Exile, Patriarch's Bidding, Plains, Quickbeam Upstart Ent, Realmwalker, Return to Nature, Sandsteppe Citadel, Sapling of Colfenor, Seedguide Ash, Slaughter the Strong, Sol Ring, Spidersilk Armor, Stoneskin, Sunpetal Grove, Swamp, Swords to Plowshares, Temple of Malady, The Great Henge, Thran Dynamo, Timber Protector, Tower Defense, Tree of Perdition, Tree of Redemption, Treefolk Harbinger, Trostani Selesnya's Voice, Valor, Wave of Reckoning, Wickerbough Elder, Wild Growth, Woodfall Primus, Woodland Cemetery, Wrenn and Realmbreaker, Yavimaya Cradle of Growth, Yedora Grave Gardener, Zopandrel Hunger Dominus</p>\n  "}, "props": {"title": "Props", "html": "\n  <h3>Stage Props</h3>\n  <p>I figured this would be a great place to keep the stage props I make for my wife's theater classes. I doubt this section will ever grow much further than a few pieces, yet I thought it would be fun to keep a record of them so she can always look back on them after they end up at their permanent home at the theater.</p>\n  <img src=\"images/props-fence-panel.jpg\" alt=\"A gate piece, and shelving brackets, to become a section of fence\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p style=\"color:var(--color-text-secondary);font-size:13px;\">A gate piece, and shelving brackets, to become a section of fence.</p>\n  <h3>A Simple Section of Fencing</h3>\n  <p>Time: 5 minutes to assemble. Price: 80 dollars for all materials.</p>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQVsYI3k7DLJ5JvtoR97u349ymffIH2a8IrNtXLFEpBWIqHOssQmT4RPeP-Fcf-s1XSOTPR_qEi-bvZKVUbpKIc731F-43N1_u5Yv1RPDNJjmUiwuD9RlpkQZRCB4NPanTWMRoeSsrBDO4lyjpGw_6LcOFGTpDS-izS4TY29t0NGPYH9lBFrUMXt4GkAkH0Oj29uYpqkcVVMp-ggpEwes5Z44J06yfHI2jTH7sQoJ0Q=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>Fence Hardware</h3>\n  <p>The gate piece was found at Lowe's and had these metal brackets for a no-dig system. I thought it would look more authentic with them removed.</p>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQV-xxKOfnM_Iw0-rJFy9yVFezsxD6mSFPrf3uaQ82Jf5GjrOFuoOgUVmPQpLJlIKfCx9C7UBdiPYndpB5akSKrf0hF_0NTmxEH9rl7UEG-Eyr4bj8QROylyj4d8NiGST0dxYMllMbXE2ncmxaqsVXTZx8EuWZv2icAFyVhsiS33qHgZQ37ugNmqnHgHeVSj2SG9gXtRsiqv_iURZcpSpHnld6lpSuYP4qXi_OgC4Z4=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\"><img src=\"images/props-hardware-bag.jpg\" alt=\"Hardware for the project\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>Shelving Brace</h3>\n  <p>I picked this piece up in the shelving section. It took me about 45 minutes and lots of pondering to come up with the idea. My restrictions included: no sawing, all pieces needed to come from the hardware store, and I needed to come up with a solution on the fly.</p>\n  <img src=\"images/props-table-legs.jpg\" alt=\"Building the piece\" style=\"width:100%;border-radius:4px;margin:12px 0;\"><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXEZ_01CDLF7U4krDeeDYUHfH5qY0hj3qFmOMQIiGmRb2r_ieyNAIhaEDcBCOlsP8BwLRFtu7OBr7vK4xSE1e8sju4TuyO9rMOsWvOsg7jQTolYKFm3pJ2d05rtQTLDEp78XaUbRnU8w_lSGa-7Vekr1ObBUyDUgrPoTSpvZ-IID6K0S-zp1RqRQtw3XBeNh7aKFzEwUiMb4bO6XR7RFmP5il2yonRKEUbTFzhsc_w=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">"}, "warhammer": {"title": "Warhammer", "html": "\n  <img src=\"images/warhammer-recruits-cutting-mat.jpg\" alt=\"The recruit edition set, fresh out of the box\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p style=\"color:var(--color-text-secondary);font-size:13px;\">My first model.</p>\n  <h3>My First Time Painting Models</h3>\n  <p>Over the winter of 2022, I decided that I wanted to give miniature painting a shot. I am currently working on the recruit edition set of Warhammer models. So far it has been an absolute blast to put these together and paint. As you can tell I am still learning and working to improve. I find it difficult to make the time for it because once I start it is a two-plus hour journey each time.</p>\n  <p><strong>Most important thing I have learned? Thin your paints!</strong></p><img src=\"images/warhammer-painted-squad.jpg\" alt=\"The squad, painted up\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQV1ZV6aAEsh7e_Hmulbhr53IV9XdvfNbVll31UozdAnEn7Ni_j3X6-qzzcLvqIVmpC3-QFxypTYWV5anKb99gmsMFvyVxG5tbRzzUigaTTpUPuqlf6ggNYn2k8L7veHJQXGdVe7KaaC0beOTkqMbUYkpA72LcT5VWdeYY_XSqCdn8LlCA5dSTGEcDUV56x2GAA9RW6fZsVumE_K4k2wGC2E5VZ6KHpsuhMFvPT_=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\"><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXqfH49Ml3AFvBT3u5mBg7hSXmv0AT9zCjf12-u-RKPsKj5kI1xFAgRI_vxV1Q9HpAnFS5uvNgcV2KchEG0jaQA-0Ods_0EZXPNWP3YXvj4HvyRjvWhVQZ2LK3IItZzObdEy4jTvgnPuyf9cABpUru4Qz0ArsS704girnZrdlPpP6-U4lZ2vR14W-LvOxeRWvs8vxDobrA8G50nrBxgAhQEGnGQqc5sPjGBSvBHwPQ=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\"><img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQUUvDQFDdHDUCqeIdc2d14fZ-xoNEwlNy3iJ0T6sBmH41OFuA4_tO2iICuZCCZgVRtBu92cDlvHxNniH7Enan99F9St1a-iNszs5w0dUn9rdCX-jIU9XkaI15vm6yPMZcK2IyzxHIgdWwAqC3tk1VKMxtOSMn_CrWTZTOp5yR2ReFAHmmor2bHxtjtL7d3aQkCYOS5kpJgkV_LO5SfygklShSDJ_plzrlpo2ii1=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>Averland Sunsets</h3>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQUtq2_FePM4dC0bsgFpcAncN6CaJMUNso6pERuzo2a31qdkVYUuE3lngzndHArNrPsrVLrm4R3BroeKZ9TVle4hVtECCf4gXsCry4n0QEU35dfU9bOIRiD97Y9xMC-F82aQz0NYHHfF96yXuTqUKm32-jcjYu_BiB6-yIKv-R5gFx7_XjbbaRMj9uukmAk78P2LLvssNLaMgVG7IwE9Q9nDcVdQdTk4VZ0Xy_yJ=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>Gehenna's Gold</h3>\n  <p>While working on the recruit box I decided to pick up Gehenna's Gold. I think the gold completely changes the feel of the model. I am currently using a wet palette, and you cannot let it sit for longer than a few hours or it will begin to separate.</p>\n  <img src=\"https://lh3.googleusercontent.com/sitesv/AG8ngQXAYjtgGXCcb5SErLDaOKFa2YtjgRaG-t0D6504K6sDV5w_frnM1E13Rti6eT3DvBnkmusLWRjlyW1crRFHZuVTpTFyU3LWz_XZMRBaxwr8NLix-FBH1adKt6j3B2a_kLLIkbyZLFQ-kXVVfMyuDOO2quMXAmrdUezhjTFpDcGiBuHxHjeZJbnzmjw1xFFFe46sJHKPSb559dXNqgs2sDGy7g-DsL-b7eoQ8tYW_zo=w1280\" alt=\"\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <h3>Current Workspace</h3><img src=\"images/warhammer-resin-printer.jpg\" alt=\"The current workspace, with a freshly printed mini\" style=\"width:100%;border-radius:4px;margin:12px 0;\">\n  <p>I purchased this cutting mat from Dollar Tree for $1.25. It has held up well for the recruit box thus far. The paint stand in the back was 3D printed, it took about 48 hours on the printer. You can find many like it on Thingiverse.</p>\n  <h3>Warhammer 2025 Update!</h3>\n  <p>I have just picked up my first army outside of the collectors box &mdash; I picked Orks for the fun paint schemes and WAAAGHHH!</p>\n  "}, "authors-and-books-i-enjoy": {"title": "Authors and Books I Enjoy", "html": "\n  <p>A wise man once said to me, you can learn to do anything you desire through a book. Since then I have been a reader of books and articles about topics I enjoy. This section is dedicated to you. Below you will find some of my favorite books.</p>\n  <ul style=\"margin:16px 0 0 20px;line-height:2;\">\n    <li><a href=\"https://www.goodreads.com/book/show/78127.On_Killing\" target=\"_blank\" rel=\"noopener\">On Killing: The Psychological Cost of Learning to Kill in War and Society</a></li>\n    <li><a href=\"https://www.goodreads.com/book/show/6611294-on-guard\" target=\"_blank\" rel=\"noopener\">On Guard: Defending Your Faith with Reason and Precision</a></li>\n    <li><a href=\"https://www.goodreads.com/book/show/40360266-spearhead\" target=\"_blank\" rel=\"noopener\">Spearhead: An American Tank Gunner, His Enemy, and a Collision of Lives In World War II</a></li>\n  </ul>\n  "}};
+
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const modalClose = document.getElementById('modalClose');
+
+        document.querySelectorAll('.card[data-page]').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                const slug = card.dataset.page;
+                const page = PAGES[slug];
+                if (!page) return;
+                modalTitle.textContent = page.title;
+                modalBody.innerHTML = page.html;
+                modalOverlay.classList.add('open');
+            });
+        });
+
+        function closeModal() {
+            modalOverlay.classList.remove('open');
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
         });
     </script>
 </body>

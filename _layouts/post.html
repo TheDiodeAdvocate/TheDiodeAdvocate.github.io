@@ -1,0 +1,13 @@
+---
+layout: default
+---
+<article class="post-body-wrap">
+    <div class="post-header">
+        <div class="post-title">{{ page.title }}</div>
+        <div class="post-date">{{ page.date | date: "%b %-d, %Y" }}</div>
+    </div>
+    <div class="post-body">
+        {{ content }}
+    </div>
+    <a class="back-link" href="{{ '/journal.html' | relative_url }}">&larr; Back to journal</a>
+</article>
