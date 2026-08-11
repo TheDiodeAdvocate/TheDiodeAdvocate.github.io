@@ -6,7 +6,7 @@ date: 2026-08-10
 
 
 # Corridor
-platform: TryHackMeroom
+platform: TryHackMe
 
 ## Overview
 IDOR-style room: a corridor of clickable doors, each linking to a URL path
