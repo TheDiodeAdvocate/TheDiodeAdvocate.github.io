@@ -15,7 +15,7 @@ at Free Geek (https://www.freegeek.org/) had a decent price on a used OptiPlex t
 | Storage: 256 GB NVMe (PC711 NVMe SK hynix 256GB)
 | GPU: Intel UHD Graphics 750
 
-![Optiplex](images/Optiplex.jpg)
+![Optiplex Server](/images/Optiplex.jpg)
 
 I am a big fan of how well Free Geek Packaged this hardware, the only thing I had to do was open it up and blow the dust out (expected on a used PC imho). I am also a fan of how it only cost me $305 to get it! The next
 steps I think I will take with the home lab will involve moving some hardware around to find space for the OptiPlex on the rack shelf. I would absolutely purchase from Free Geek again! 
